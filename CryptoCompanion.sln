@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCompanion", "CryptoCompanion\CryptoCompanion.csproj", "{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCompanionApi", "CryptoCompanionApi\CryptoCompanionApi.csproj", "{75D0B02F-5D5C-3A51-58C9-3CEA8DA8D2FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D0B02F-5D5C-3A51-58C9-3CEA8DA8D2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D0B02F-5D5C-3A51-58C9-3CEA8DA8D2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D0B02F-5D5C-3A51-58C9-3CEA8DA8D2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D0B02F-5D5C-3A51-58C9-3CEA8DA8D2FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05DCD625-06F3-4F5A-80B7-BF96C6A96A73}
+	EndGlobalSection
+EndGlobal

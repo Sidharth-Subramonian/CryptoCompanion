@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CryptoCompanion.ViewModels"
+             x:DataType="viewmodels:PortfolioViewModel"
+             x:Class="CryptoCompanion.Views.PortfolioPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <Label Text="Your Assets" Style="{StaticResource HeadlineLabelStyle}" />
+            <Label Text="Total Value: $20,000.00" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+            
+            <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="10" Padding="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="AI Risk Analysis" TextColor="White" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Based on individual asset volatility and historic returns." TextColor="White" FontSize="12" />
+                    <Button Text="Analyze Portfolio Risk" Command="{Binding AnalyzePortfolioRiskCommand}" Margin="0,10,0,0" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="White" />
+                    <Label Text="{Binding PortfolioRiskAnalysis}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Label Text="Holdings Breakdown" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0" />
+            
+            <CollectionView ItemsSource="{Binding Assets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
+                            <Label Grid.Column="0" Text="{Binding Symbol}" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" WidthRequest="60" />
+                            <ProgressBar Grid.Column="1" Progress="{Binding Allocation, StringFormat='{0:F2}'}" ProgressColor="{StaticResource Primary}" VerticalOptions="Center" Margin="10,0" />
+                            <Label Grid.Column="2" Text="{Binding Value, StringFormat='${0:N0}'}" FontSize="16" VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

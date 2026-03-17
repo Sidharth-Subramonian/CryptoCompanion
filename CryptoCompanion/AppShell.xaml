@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CryptoCompanion.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CryptoCompanion"
+    xmlns:views="clr-namespace:CryptoCompanion.Views"
+    Title="CryptoCompanion">
+
+    <TabBar>
+        <Tab Title="Suggestions" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:SuggestionsPage}" Route="SuggestionsPage" />
+        </Tab>
+        <Tab Title="News" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" Route="NewsPage" />
+        </Tab>
+        <Tab Title="Sentiment" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:SentimentPage}" Route="SentimentPage" />
+        </Tab>
+        <Tab Title="Portfolio" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:PortfolioPage}" Route="PortfolioPage" />
+        </Tab>
+        <Tab Title="Alerts" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AlertsPage}" Route="AlertsPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>
