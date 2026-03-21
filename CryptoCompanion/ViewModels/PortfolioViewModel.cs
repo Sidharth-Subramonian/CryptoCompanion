@@ -2,33 +2,91 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoCompanion.Services.ML;
+using CryptoCompanion.Services.Api;
 
 namespace CryptoCompanion.ViewModels;
 
 public partial class PortfolioViewModel : BaseViewModel
 {
     private readonly IOnnxInferenceService _mlService;
+    private readonly IBackendApiService _apiService;
 
     [ObservableProperty]
     private string _portfolioRiskAnalysis;
 
     [ObservableProperty]
+    private string _totalValueDisplay = "Loading...";
+
+    [ObservableProperty]
     private ObservableCollection<PortfolioAsset> _assets = new();
 
-    public PortfolioViewModel(IOnnxInferenceService mlService)
+    public PortfolioViewModel(IOnnxInferenceService mlService, IBackendApiService apiService)
     {
         _mlService = mlService;
+        _apiService = apiService;
         Title = "Portfolio Tracker";
         PortfolioRiskAnalysis = "Calculating ML Risk Profile...";
         
-        LoadMockPortfolio();
+        Task.Run(LoadPortfolioFromApiAsync);
     }
 
-    private void LoadMockPortfolio()
+    private async Task LoadPortfolioFromApiAsync()
     {
-        Assets.Add(new PortfolioAsset { Symbol = "BTC", Value = 12000, Allocation = 60 });
-        Assets.Add(new PortfolioAsset { Symbol = "ETH", Value = 6000, Allocation = 30 });
-        Assets.Add(new PortfolioAsset { Symbol = "SOL", Value = 2000, Allocation = 10 });
+        try
+        {
+            IsBusy = true;
+            
+            var cryptoAssets = await _apiService.GetSuggestionsAsync();
+            
+            if (cryptoAssets == null || !cryptoAssets.Any())
+            {
+                TotalValueDisplay = "No data — is API running?";
+                return;
+            }
+
+            // Take top 5 assets and simulate portfolio allocation based on market cap ratios
+            var topAssets = cryptoAssets.Take(5).ToList();
+            var totalMarketCap = topAssets.Sum(a => a.MarketCap);
+
+            decimal totalValue = 0;
+            var portfolioAssets = new List<PortfolioAsset>();
+
+            foreach (var asset in topAssets)
+            {
+                decimal allocation = totalMarketCap > 0 
+                    ? Math.Round(asset.MarketCap / totalMarketCap, 2) 
+                    : 0.2m;
+                
+                // Simulate holding $10,000 worth, distributed by market cap ratio
+                decimal holdingValue = 10000m * allocation;
+                totalValue += holdingValue;
+
+                portfolioAssets.Add(new PortfolioAsset
+                {
+                    Symbol = asset.Symbol,
+                    Value = holdingValue,
+                    Allocation = allocation
+                });
+            }
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Assets.Clear();
+                foreach (var pa in portfolioAssets)
+                {
+                    Assets.Add(pa);
+                }
+                TotalValueDisplay = $"${totalValue:N2}";
+            });
+        }
+        catch (Exception ex)
+        {
+            TotalValueDisplay = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]
@@ -41,17 +99,27 @@ public partial class PortfolioViewModel : BaseViewModel
             IsBusy = true;
             await _mlService.InitializeAsync();
             
-            // Mock holistic portfolio features: Volatility, DailyReturn, MarketCap weight
-            float portfolioVol = 3.5f;
-            float portfolioReturn = 1.2f;
-            float averageMcWeight = 8.0f;
+            // Use real portfolio data for ML inference
+            var cryptoAssets = await _apiService.GetSuggestionsAsync();
             
-            int clusterId = _mlService.PredictPortfolioCluster(portfolioVol, portfolioReturn, averageMcWeight);
+            if (cryptoAssets == null || !cryptoAssets.Any())
+            {
+                PortfolioRiskAnalysis = "No data available for risk analysis";
+                return;
+            }
+
+            // Compute portfolio-level features from real data
+            var topAssets = cryptoAssets.Take(5).ToList();
+            float portfolioVol = (float)topAssets.Average(a => Math.Abs((double)a.PercentChange24h));
+            float portfolioReturn = (float)topAssets.Average(a => (double)a.PercentChange24h);
+            float avgMcWeight = (float)(topAssets.Average(a => (double)a.MarketCap) / 1_000_000_000);
+
+            int clusterId = _mlService.PredictPortfolioCluster(portfolioVol, portfolioReturn, avgMcWeight);
             
             string riskProfile = clusterId switch
             {
                 0 => "Low Risk / Steady Growth (Stable)",
-                1 => "High Risk / High Yield (Aggressive)", // based on our python dummy weights
+                1 => "High Risk / High Yield (Aggressive)",
                 2 => "Moderate Risk / Balanced",
                 _ => "Unknown Risk Profile"
             };

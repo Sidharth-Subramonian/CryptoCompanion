@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CryptoCompanion</name>
+    </assembly>
+    <members>
+        <member name="T:CryptoCompanion.ViewModels.AlertsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.AlertsViewModel.ActiveAlerts">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.AlertsViewModel._activeAlerts"/>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.AlertsViewModel.loadAlertsCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.AlertsViewModel.LoadAlertsCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.AlertsViewModel.LoadAlertsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.AlertsViewModel.LoadAlertsAsync"/>.</summary>
+        </member>
+        <member name="T:CryptoCompanion.ViewModels.BaseViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.BaseViewModel.IsBusy">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.BaseViewModel._isBusy"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.BaseViewModel.Title">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.BaseViewModel._title"/>
+        </member>
+        <member name="T:CryptoCompanion.ViewModels.NewsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.NewsViewModel.NewsArticles">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.NewsViewModel._newsArticles"/>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.NewsViewModel.loadNewsCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.NewsViewModel.LoadNewsCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.NewsViewModel.LoadNewsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.NewsViewModel.LoadNewsAsync"/>.</summary>
+        </member>
+        <member name="T:CryptoCompanion.ViewModels.PortfolioViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.PortfolioViewModel.PortfolioRiskAnalysis">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.PortfolioViewModel._portfolioRiskAnalysis"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.PortfolioViewModel.TotalValueDisplay">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.PortfolioViewModel._totalValueDisplay"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.PortfolioViewModel.Assets">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.PortfolioViewModel._assets"/>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.PortfolioViewModel.analyzePortfolioRiskCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.PortfolioViewModel.AnalyzePortfolioRiskCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.PortfolioViewModel.AnalyzePortfolioRiskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.PortfolioViewModel.AnalyzePortfolioRiskAsync"/>.</summary>
+        </member>
+        <member name="T:CryptoCompanion.ViewModels.SentimentViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.BullishPercent">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._bullishPercent"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.BearishPercent">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._bearishPercent"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.NeutralPercent">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._neutralPercent"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.SentimentStatus">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._sentimentStatus"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.TotalPosts">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._totalPosts"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.SentimentPosts">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SentimentViewModel._sentimentPosts"/>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.SentimentViewModel.loadSentimentCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.SentimentViewModel.LoadSentimentCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SentimentViewModel.LoadSentimentCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.SentimentViewModel.LoadSentimentAsync"/>.</summary>
+        </member>
+        <member name="T:CryptoCompanion.ViewModels.SuggestionsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SuggestionsViewModel.BtcForecast">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SuggestionsViewModel._btcForecast"/>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SuggestionsViewModel.BtcRank">
+            <inheritdoc cref="F:CryptoCompanion.ViewModels.SuggestionsViewModel._btcRank"/>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.SuggestionsViewModel.runMlPredictionsCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.SuggestionsViewModel.RunMlPredictionsCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.SuggestionsViewModel.RunMlPredictionsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.SuggestionsViewModel.RunMlPredictionsAsync"/>.</summary>
+        </member>
+        <member name="T:CryptoCompanion.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ActiveAlerts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ActiveAlerts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NewsArticles">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NewsArticles" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PortfolioRiskAnalysis">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PortfolioRiskAnalysis" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalValueDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalValueDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Assets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Assets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BullishPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BullishPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BearishPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BearishPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NeutralPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NeutralPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SentimentStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SentimentStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalPosts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalPosts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SentimentPosts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SentimentPosts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BtcForecast">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BtcForecast" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BtcRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BtcRank" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ActiveAlerts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ActiveAlerts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NewsArticles">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NewsArticles" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PortfolioRiskAnalysis">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PortfolioRiskAnalysis" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalValueDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalValueDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Assets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Assets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BullishPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BullishPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BearishPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BearishPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NeutralPercent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NeutralPercent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SentimentStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SentimentStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalPosts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalPosts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SentimentPosts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SentimentPosts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BtcForecast">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BtcForecast" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BtcRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BtcRank" generated properties.</summary>
+        </member>
+    </members>
+</doc>

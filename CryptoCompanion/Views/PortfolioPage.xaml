@@ -7,31 +7,104 @@
              Title="{Binding Title}">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20">
-            
-            <Label Text="Your Assets" Style="{StaticResource HeadlineLabelStyle}" />
-            <Label Text="Total Value: $20,000.00" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
-            
-            <Frame BackgroundColor="{StaticResource Secondary}" CornerRadius="10" Padding="20">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="AI Risk Analysis" TextColor="White" FontSize="18" FontAttributes="Bold" />
-                    <Label Text="Based on individual asset volatility and historic returns." TextColor="White" FontSize="12" />
-                    <Button Text="Analyze Portfolio Risk" Command="{Binding AnalyzePortfolioRiskCommand}" Margin="0,10,0,0" />
-                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="White" />
-                    <Label Text="{Binding PortfolioRiskAnalysis}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="16" Padding="24,20">
+
+            <!-- Header -->
+            <Label Text="💼 Portfolio" FontSize="28" FontAttributes="Bold"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Total Value Card -->
+            <Border BackgroundColor="{StaticResource CardBg}"
+                    Stroke="{StaticResource Primary}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16" Padding="24">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="TOTAL VALUE" FontSize="11" FontAttributes="Bold"
+                           TextColor="{StaticResource TextMuted}" />
+                    <Label Text="{Binding TotalValueDisplay, StringFormat='${0}'}"
+                           FontSize="36" FontAttributes="Bold"
+                           TextColor="{StaticResource Accent}" />
+                    <Label Text="Based on top assets by market cap"
+                           FontSize="12" TextColor="{StaticResource TextSecondary}" />
                 </VerticalStackLayout>
-            </Frame>
-            
-            <Label Text="Holdings Breakdown" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0" />
-            
+            </Border>
+
+            <!-- AI Risk Analysis Card -->
+            <Border BackgroundColor="{StaticResource CardBg}"
+                    Stroke="{StaticResource Secondary}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16" Padding="24">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Grid.Column="0" Text="🤖" FontSize="20" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" Margin="8,0,0,0">
+                            <Label Text="AI RISK ANALYSIS" FontSize="11" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextMuted}" />
+                            <Label Text="K-Means clustering on volatility &amp; returns"
+                                   FontSize="11" TextColor="{StaticResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Button Text="▶  Analyze Risk"
+                            Command="{Binding AnalyzePortfolioRiskCommand}"
+                            BackgroundColor="{StaticResource Secondary}"
+                            CornerRadius="10" Padding="18,10" FontSize="13" />
+
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       Color="{StaticResource Accent}" />
+
+                    <!-- Risk Result -->
+                    <Border BackgroundColor="{StaticResource CardBgLight}"
+                            StrokeShape="RoundRectangle 10" Padding="14,10"
+                            Stroke="Transparent" IsVisible="True">
+                        <Label Text="{Binding PortfolioRiskAnalysis}"
+                               TextColor="{StaticResource YellowNeon}"
+                               FontSize="14" FontAttributes="Bold"
+                               HorizontalOptions="Center" />
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Holdings Section -->
+            <Label Text="HOLDINGS BREAKDOWN" FontSize="11" FontAttributes="Bold"
+                   TextColor="{StaticResource TextMuted}" Margin="0,4,0,0" />
+
             <CollectionView ItemsSource="{Binding Assets}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
-                            <Label Grid.Column="0" Text="{Binding Symbol}" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" WidthRequest="60" />
-                            <ProgressBar Grid.Column="1" Progress="{Binding Allocation, StringFormat='{0:F2}'}" ProgressColor="{StaticResource Primary}" VerticalOptions="Center" Margin="10,0" />
-                            <Label Grid.Column="2" Text="{Binding Value, StringFormat='${0:N0}'}" FontSize="16" VerticalOptions="Center" />
-                        </Grid>
+                    <DataTemplate x:DataType="viewmodels:PortfolioAsset">
+                        <Border BackgroundColor="{StaticResource CardBg}"
+                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12" Padding="16" Margin="0,0,0,8">
+                            <Grid ColumnDefinitions="60,*,Auto" RowDefinitions="Auto,Auto"
+                                  ColumnSpacing="12" RowSpacing="6">
+                                <!-- Symbol -->
+                                <Border Grid.RowSpan="2" BackgroundColor="{StaticResource CardBgLight}"
+                                        StrokeShape="RoundRectangle 10" Padding="0"
+                                        Stroke="Transparent"
+                                        HeightRequest="44" WidthRequest="44"
+                                        VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Label Text="{Binding Symbol}" FontAttributes="Bold"
+                                           FontSize="13" TextColor="{StaticResource Accent}"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <!-- Allocation bar -->
+                                <Border Grid.Row="0" Grid.Column="1"
+                                        BackgroundColor="{StaticResource CardBgLight}"
+                                        StrokeShape="RoundRectangle 4" Stroke="Transparent"
+                                        HeightRequest="8" VerticalOptions="Center">
+                                    <ProgressBar Progress="{Binding Allocation}"
+                                                 ProgressColor="{StaticResource Primary}" />
+                                </Border>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                       Text="{Binding Allocation, StringFormat='{0:P0} allocation'}"
+                                       FontSize="11" TextColor="{StaticResource TextMuted}" />
+                                <!-- Value -->
+                                <Label Grid.RowSpan="2" Grid.Column="2"
+                                       Text="{Binding Value, StringFormat='${0:N0}'}"
+                                       FontSize="18" FontAttributes="Bold"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

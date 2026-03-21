@@ -1,46 +1,55 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CryptoCompanion.Models;
+using CryptoCompanion.Services.Api;
 
 namespace CryptoCompanion.ViewModels;
 
 public partial class AlertsViewModel : BaseViewModel
 {
+    private readonly IBackendApiService _apiService;
+
     [ObservableProperty]
     private ObservableCollection<AlertItem> _activeAlerts = new();
 
-    public AlertsViewModel()
+    public AlertsViewModel(IBackendApiService apiService)
     {
+        _apiService = apiService;
         Title = "Price & Volume Alerts";
-        LoadMockAlerts();
+        Task.Run(LoadAlertsAsync);
     }
 
-    private void LoadMockAlerts()
+    [RelayCommand]
+    public async Task LoadAlertsAsync()
     {
-        ActiveAlerts.Add(new AlertItem 
-        { 
-            Title = "Unusual Volume Detected", 
-            Message = "DOGE trading volume spiked 400% in the last 15 minutes.",
-            Time = "10 mins ago",
-            SeverityPath = "high", // Could map to color in UI
-            Algorithm = "Isolation Forest"
-        });
-        
-        ActiveAlerts.Add(new AlertItem 
-        { 
-            Title = "Price Drop Anomaly", 
-            Message = "ETH dropped standard deviation limits (-4%) in a single 5m candle.",
-            Time = "1 hour ago",
-            SeverityPath = "critical",
-            Algorithm = "One-Class SVM"
-        });
-    }
-}
+        if (IsBusy) return;
 
-public class AlertItem
-{
-    public string Title { get; set; } = string.Empty;
-    public string Message { get; set; } = string.Empty;
-    public string Time { get; set; } = string.Empty;
-    public string SeverityPath { get; set; } = string.Empty;
-    public string Algorithm { get; set; } = string.Empty;
+        try
+        {
+            IsBusy = true;
+
+            var alerts = await _apiService.GetAlertsAsync();
+
+            if (alerts != null && alerts.Any())
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    ActiveAlerts.Clear();
+                    foreach (var alert in alerts)
+                    {
+                        ActiveAlerts.Add(alert);
+                    }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Alerts Error: {ex.Message}");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 }
