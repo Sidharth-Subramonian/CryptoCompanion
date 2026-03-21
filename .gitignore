@@ -1,0 +1,54 @@
+# ═══ .NET / MAUI ═══
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ═══ Secrets & Environment Config ═══
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+
+# ═══ Visual Studio ═══
+.vs/
+*.rsuser
+*.csproj.user
+launchSettings.json
+
+# ═══ Build Results ═══
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+
+# ═══ NuGet ═══
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# ═══ Python ═══
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# ═══ ML / Data ═══
+*.onnx
+!CryptoCompanion/Resources/Raw/*.onnx
+
+# ═══ OS Files ═══
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ═══ EF Migrations (optional — remove if you want to track migrations) ═══
+# Migrations/
+
+# ═══ IDE ═══
+.idea/
+*.swp
+*.swo
