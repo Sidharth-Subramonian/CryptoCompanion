@@ -60,5 +60,6 @@ AboutAssets.txt
 anomaly_detector.onnx
 crypto_ranking.onnx
 portfolio_clustering.onnx
+price_direction.onnx
 price_forecast.onnx
 sentiment_classifier.onnx

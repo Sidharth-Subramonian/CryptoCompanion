@@ -57,8 +57,8 @@ public partial class PortfolioViewModel : BaseViewModel
                     ? Math.Round(asset.MarketCap / totalMarketCap, 2) 
                     : 0.2m;
                 
-                // Simulate holding $10,000 worth, distributed by market cap ratio
-                decimal holdingValue = 10000m * allocation;
+                // Simulate holding ₹10,00,000 worth, distributed by market cap ratio
+                decimal holdingValue = 1000000m * allocation;
                 totalValue += holdingValue;
 
                 portfolioAssets.Add(new PortfolioAsset
@@ -76,7 +76,7 @@ public partial class PortfolioViewModel : BaseViewModel
                 {
                     Assets.Add(pa);
                 }
-                TotalValueDisplay = $"${totalValue:N2}";
+                TotalValueDisplay = $"₹{totalValue:N2}";
             });
         }
         catch (Exception ex)

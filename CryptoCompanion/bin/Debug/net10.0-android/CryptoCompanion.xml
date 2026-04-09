@@ -29,6 +29,7 @@
         <member name="T:CryptoCompanion.ViewModels.NewsViewModel">
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:CryptoCompanion.ViewModels.NewsViewModel.NewsArticles">
             <inheritdoc cref="F:CryptoCompanion.ViewModels.NewsViewModel._newsArticles"/>
@@ -38,6 +39,12 @@
         </member>
         <member name="P:CryptoCompanion.ViewModels.NewsViewModel.LoadNewsCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.NewsViewModel.LoadNewsAsync"/>.</summary>
+        </member>
+        <member name="F:CryptoCompanion.ViewModels.NewsViewModel.openUrlCommand">
+            <summary>The backing field for <see cref="P:CryptoCompanion.ViewModels.NewsViewModel.OpenUrlCommand"/>.</summary>
+        </member>
+        <member name="P:CryptoCompanion.ViewModels.NewsViewModel.OpenUrlCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:CryptoCompanion.ViewModels.NewsViewModel.OpenUrl(System.String)"/>.</summary>
         </member>
         <member name="T:CryptoCompanion.ViewModels.PortfolioViewModel">
             <inheritdoc/>

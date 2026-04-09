@@ -16,7 +16,7 @@ public interface IBackendApiService
 public class BackendApiService : IBackendApiService
 {
     private readonly HttpClient _httpClient;
-    private const string BaseUrl = "http://localhost:5237"; 
+    private const string BaseUrl = "https://cryptocompanion-api-2101242956.azurewebsites.net"; 
 
     public BackendApiService(HttpClient httpClient)
     {

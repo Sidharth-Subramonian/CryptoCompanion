@@ -10,11 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add OpenAPI / Swagger
 builder.Services.AddOpenApi();
 
-// Register SQL Database Context (LocalDB)
+// Register SQL Database Context (Azure SQL or LocalDB)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register Cosmos Database Context (Configured for Local Emulator)
+// Register Cosmos Database Context (Azure Cloud or Local Emulator)
 builder.Services.AddDbContext<CosmosDbContext>(options =>
 {
     var endpoint = builder.Configuration.GetConnectionString("CosmosDbAccountEndpoint") 
@@ -28,14 +28,16 @@ builder.Services.AddDbContext<CosmosDbContext>(options =>
         databaseName: "CryptoCompanionDb",
         cosmosOptionsAction: cosmosOptions =>
         {
-            // BYPASS SSL for Local Emulator: This prevents "SSL Handshake" errors
-            cosmosOptions.HttpClientFactory(() => new HttpClient(new HttpClientHandler
+            if (builder.Environment.IsDevelopment())
             {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            }));
-            
-            // Gateway mode is more reliable for local development
-            cosmosOptions.ConnectionMode(ConnectionMode.Gateway);
+                // BYPASS SSL for Local Emulator only
+                cosmosOptions.HttpClientFactory(() => new HttpClient(new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                }));
+                cosmosOptions.ConnectionMode(ConnectionMode.Gateway);
+            }
+            // In Production (Azure), use default Direct mode — no SSL bypass needed
         });
 });
 
@@ -59,19 +61,22 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-// Ensure the Cosmos Database and Containers are created before workers start
+// Ensure the Cosmos Database and SQL Database are created/migrated at startup
 using (var scope = app.Services.CreateScope())
 {
     try 
     {
-        var context = scope.ServiceProvider.GetRequiredService<CosmosDbContext>();
-        // Creates the DB and 'News' container based on your OnModelCreating logic
-        await context.Database.EnsureCreatedAsync();
-        Console.WriteLine("Cosmos DB Emulator: Database and Containers verified/created.");
+        var cosmosContext = scope.ServiceProvider.GetRequiredService<CosmosDbContext>();
+        await cosmosContext.Database.EnsureCreatedAsync();
+        Console.WriteLine("Cosmos DB: Database and Containers verified/created.");
+
+        var sqlContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await sqlContext.Database.MigrateAsync();
+        Console.WriteLine("SQL DB: Database migrated successfully.");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Cosmos Startup Error: {ex.Message}. Is the Emulator running?");
+        Console.WriteLine($"Startup Database Error: {ex.Message}");
     }
 }
 

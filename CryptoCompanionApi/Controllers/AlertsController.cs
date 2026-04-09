@@ -42,7 +42,7 @@ public class AlertsController : ControllerBase
                     alerts.Add(new
                     {
                         title = $"Price Drop Alert: {asset.Symbol}",
-                        message = $"{asset.Name} dropped {asset.PercentChange24h:F1}% in the last 24 hours. Current price: ${asset.CurrentPrice:N2}",
+                        message = $"{asset.Name} dropped {asset.PercentChange24h:F1}% in the last 24 hours. Current price: ₹{asset.CurrentPrice:N2}",
                         time = GetRelativeTime(asset.LastUpdated),
                         severityPath = "critical",
                         algorithm = "Threshold Detection"
@@ -54,7 +54,7 @@ public class AlertsController : ControllerBase
                     alerts.Add(new
                     {
                         title = $"Price Surge: {asset.Symbol}",
-                        message = $"{asset.Name} surged +{asset.PercentChange24h:F1}% in the last 24 hours. Current price: ${asset.CurrentPrice:N2}",
+                        message = $"{asset.Name} surged +{asset.PercentChange24h:F1}% in the last 24 hours. Current price: ₹{asset.CurrentPrice:N2}",
                         time = GetRelativeTime(asset.LastUpdated),
                         severityPath = "high",
                         algorithm = "Threshold Detection"
@@ -67,7 +67,7 @@ public class AlertsController : ControllerBase
                     alerts.Add(new
                     {
                         title = $"Unusual Volume: {asset.Symbol}",
-                        message = $"{asset.Name} trading volume (${asset.Volume24h:N0}) is unusually high relative to market cap.",
+                        message = $"{asset.Name} trading volume (₹{asset.Volume24h:N0}) is unusually high relative to market cap.",
                         time = GetRelativeTime(asset.LastUpdated),
                         severityPath = "high",
                         algorithm = "Volume Anomaly"

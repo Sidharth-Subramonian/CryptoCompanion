@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CryptoCompanionApi",
+    "\\CryptoCompanionApi\\Controllers",
+    "\\CryptoCompanionApi\\Data",
+    "\\CryptoCompanionApi\\Migrations",
+    "\\CryptoCompanionApi\\Models",
+    "\\CryptoCompanionApi\\Properties"
   ],
-  "SelectedNode": "\\CryptoCompanion.sln",
+  "SelectedNode": "\\CryptoCompanionApi\\CryptoCompanionApi.csproj",
   "PreviewInSolutionExplorer": false
 }

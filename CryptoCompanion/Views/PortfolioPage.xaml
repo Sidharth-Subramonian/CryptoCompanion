@@ -20,7 +20,7 @@
                 <VerticalStackLayout Spacing="8">
                     <Label Text="TOTAL VALUE" FontSize="11" FontAttributes="Bold"
                            TextColor="{StaticResource TextMuted}" />
-                    <Label Text="{Binding TotalValueDisplay, StringFormat='${0}'}"
+                    <Label Text="{Binding TotalValueDisplay, StringFormat='₹{0}'}"
                            FontSize="36" FontAttributes="Bold"
                            TextColor="{StaticResource Accent}" />
                     <Label Text="Based on top assets by market cap"
@@ -99,7 +99,7 @@
                                        FontSize="11" TextColor="{StaticResource TextMuted}" />
                                 <!-- Value -->
                                 <Label Grid.RowSpan="2" Grid.Column="2"
-                                       Text="{Binding Value, StringFormat='${0:N0}'}"
+                                       Text="{Binding Value, StringFormat='₹{0:N0}'}"
                                        FontSize="18" FontAttributes="Bold"
                                        TextColor="{StaticResource TextPrimary}"
                                        VerticalOptions="Center" />

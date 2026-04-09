@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="CryptoCompanion" mvid="92530bf4427343d5bc41fc941e4beb18">
+<api type="debug" assembly-name="CryptoCompanion" mvid="885895680a5048b4939f3fd578d6a664">
   <java-to-managed>
     <entry java-name="crc64b64144fbb2ad3175/MainActivity" managed-name="CryptoCompanion.MainActivity, CryptoCompanion" managed-type-token-id="33554443" />
     <entry java-name="crc64b64144fbb2ad3175/MainApplication" managed-name="CryptoCompanion.MainApplication, CryptoCompanion" managed-type-token-id="33554444" />

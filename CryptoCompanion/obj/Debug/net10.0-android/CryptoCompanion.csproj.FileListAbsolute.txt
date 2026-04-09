@@ -2724,3 +2724,4 @@ C:\Users\sidha\OneDrive\Documents\CryptoCompanion\CryptoCompanion\obj\Debug\net1
 C:\Users\sidha\OneDrive\Documents\CryptoCompanion\CryptoCompanion\obj\Debug\net10.0-android\stamp\_GenerateJavaStubs.stamp
 C:\Users\sidha\OneDrive\Documents\CryptoCompanion\CryptoCompanion\obj\Debug\net10.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\sidha\OneDrive\Documents\CryptoCompanion\CryptoCompanion\obj\Debug\net10.0-android\stamp\_ResolveLibraryProjectImports.stamp
+c:\Users\sidha\OneDrive\Documents\CryptoCompanion\CryptoCompanion\obj\Debug\net10.0-android\assets\price_direction.onnx

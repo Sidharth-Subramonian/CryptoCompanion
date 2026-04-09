@@ -14,16 +14,15 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="24,20" Spacing="16">
-
-            <!-- Header Section -->
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header Section -->
+        <VerticalStackLayout Grid.Row="0" Spacing="12" Padding="24,20,24,12">
             <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
                 <VerticalStackLayout Grid.Column="0" Spacing="4">
-                    <Label Text="⚡ AI Forecasts"
+                    <Label Text="⚡ AI Suggestions"
                            FontSize="28" FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}" />
-                    <Label Text="Real-time ML predictions from live market data"
+                    <Label Text="ML-ranked picks from live market data"
                            FontSize="13" TextColor="{StaticResource TextSecondary}" />
                 </VerticalStackLayout>
             </Grid>
@@ -35,7 +34,7 @@
                     <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="2">
                         <Label Text="ONNX Runtime Engine" FontSize="12"
                                TextColor="{StaticResource Accent}" FontAttributes="Bold" />
-                        <Label Text="Price Forecast + Crypto Ranking models"
+                        <Label Text="Analyzing all coins • Ranked by AI Strength"
                                FontSize="11" TextColor="{StaticResource TextMuted}" />
                     </VerticalStackLayout>
                     <Button Grid.Column="1" Text="▶  Run AI"
@@ -49,55 +48,82 @@
                                HorizontalOptions="Center" Color="{StaticResource Accent}"
                                WidthRequest="40" HeightRequest="40" />
 
-            <!-- Results Section Header -->
-            <Label Text="PREDICTIONS" FontSize="11" FontAttributes="Bold"
-                   TextColor="{StaticResource TextMuted}" Margin="0,4,0,0" />
+            <!-- Summary after running -->
+            <Label Text="{Binding BtcForecast}" FontSize="12" TextColor="{StaticResource TextSecondary}" />
+            <Label Text="{Binding BtcRank}" FontSize="11" TextColor="{StaticResource TextMuted}" />
 
-            <!-- Prediction Cards -->
-            <CollectionView ItemsSource="{Binding Suggestions}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:SuggestionModel">
-                        <Border BackgroundColor="{StaticResource CardBg}"
-                                Stroke="{StaticResource Gray600}" StrokeThickness="1"
-                                Padding="20" StrokeShape="RoundRectangle 14" Margin="0,4">
-                            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
-                                <!-- Coin Name -->
-                                <Label Grid.Row="0" Text="{Binding Name}"
+            <!-- Results Section Header -->
+            <Label Text="TOP PICKS" FontSize="11" FontAttributes="Bold"
+                   TextColor="{StaticResource TextMuted}" Margin="0,4,0,0" />
+        </VerticalStackLayout>
+
+        <!-- Prediction Cards -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Suggestions}" SelectionMode="None" Margin="24,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SuggestionModel">
+                    <Border BackgroundColor="{StaticResource CardBg}"
+                            Stroke="{StaticResource Gray600}" StrokeThickness="1"
+                            Padding="20" StrokeShape="RoundRectangle 14" Margin="0,0,0,12">
+                        <VerticalStackLayout Spacing="10">
+
+                            <!-- Row 1: Coin Name + Signal Badge -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{Binding Name}"
                                        TextColor="{StaticResource Accent}"
                                        FontSize="18" FontAttributes="Bold" />
-                                <!-- Forecast -->
-                                <Border Grid.Row="1" BackgroundColor="{StaticResource CardBgLight}"
-                                        StrokeShape="RoundRectangle 8" Padding="12,8"
-                                        Stroke="Transparent">
+                                <Border Grid.Column="1"
+                                        BackgroundColor="{StaticResource GreenDim}"
+                                        StrokeShape="RoundRectangle 8" Padding="10,5"
+                                        Stroke="Transparent" HorizontalOptions="End">
+                                    <Label Text="{Binding Signal}"
+                                           FontSize="12" FontAttributes="Bold"
+                                           TextColor="{StaticResource GreenNeon}" />
+                                </Border>
+                            </Grid>
+
+                            <!-- Row 2: Price Forecast (Current → Predicted) -->
+                            <Border BackgroundColor="{StaticResource CardBgLight}"
+                                    StrokeShape="RoundRectangle 10" Padding="14,10"
+                                    Stroke="Transparent">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="{Binding Timeline}" FontSize="10"
+                                           TextColor="{StaticResource TextMuted}" FontAttributes="Bold" />
                                     <Label Text="{Binding Forecast}"
                                            TextColor="{StaticResource TextPrimary}"
-                                           FontSize="13" FontFamily="OpenSansRegular" />
-                                </Border>
-                                <!-- Rank -->
-                                <Label Grid.Row="2" Text="{Binding Rank}"
-                                       TextColor="{StaticResource TextSecondary}" FontSize="12" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                           FontSize="15" FontAttributes="Bold" />
+                                </VerticalStackLayout>
+                            </Border>
 
-            <!-- Empty State -->
-            <Border IsVisible="{Binding IsEmpty}"
-                    BackgroundColor="{StaticResource CardBg}"
-                    StrokeShape="RoundRectangle 14" Stroke="{StaticResource Gray600}"
-                    Padding="30" HorizontalOptions="Fill">
-                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                    <Label Text="🔮" FontSize="32" HorizontalOptions="Center" />
-                    <Label Text="No predictions yet"
-                           FontSize="16" TextColor="{StaticResource TextSecondary}"
-                           HorizontalOptions="Center" />
-                    <Label Text="Tap 'Run AI' to analyze live market data"
-                           FontSize="12" TextColor="{StaticResource TextMuted}"
-                           HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </Border>
+                            <!-- Row 3: AI Reasoning -->
+                            <Label Text="{Binding Reasoning}"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="12" LineBreakMode="WordWrap" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+                            <!-- Row 4: Ranking Score -->
+                            <Label Text="{Binding Rank}"
+                                   TextColor="{StaticResource TextMuted}" FontSize="11"
+                                   FontAttributes="Bold" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Border BackgroundColor="{StaticResource CardBg}"
+                        StrokeShape="RoundRectangle 14" Stroke="{StaticResource Gray600}"
+                        Padding="30" HorizontalOptions="Fill" Margin="0,20">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🔮" FontSize="32" HorizontalOptions="Center" />
+                        <Label Text="No predictions yet"
+                               FontSize="16" TextColor="{StaticResource TextSecondary}"
+                               HorizontalOptions="Center" />
+                        <Label Text="Tap 'Run AI' to analyze all coins with ML"
+                               FontSize="12" TextColor="{StaticResource TextMuted}"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
 </ContentPage>

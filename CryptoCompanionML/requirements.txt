@@ -3,3 +3,4 @@ pandas
 scikit-learn
 skl2onnx
 onnxruntime
+yfinance
