@@ -1,0 +1,9 @@
+**/*.dockerignore
+**/*.bin
+**/*.obj
+**/out
+**/publish
+.git
+.github
+.vs
+.vscode

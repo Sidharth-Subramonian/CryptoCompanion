@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cryptocompanion-api
+  labels:
+    app: cryptocompanion-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cryptocompanion-api
+  template:
+    metadata:
+      labels:
+        app: cryptocompanion-api
+    spec:
+      containers:
+      - name: cryptocompanion-api
+        image: <YOUR_ACR_NAME>.azurecr.io/cryptocompanionapi:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        # Connection strings should be mapped to K8s secrets or Key Vault in production
+        # For simplicity in Review II, we can use the environment variables as in App Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cryptocompanion-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: cryptocompanion-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
