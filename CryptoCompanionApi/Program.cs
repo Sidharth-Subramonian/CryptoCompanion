@@ -13,7 +13,10 @@ builder.Services.AddSwaggerGen();
 
 // Register SQL Database Context (Azure SQL or LocalDB)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()
+    ));
 
 // Register Cosmos Database Context (Azure Cloud or Local Emulator)
 builder.Services.AddDbContext<CosmosDbContext>(options =>
