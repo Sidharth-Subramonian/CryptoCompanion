@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // --- 1. SERVICE REGISTRATION ---
 
-// Add OpenAPI / Swagger
-builder.Services.AddOpenApi();
+// Add Swagger/OpenAPI support (.NET 8 standard)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Register SQL Database Context (Azure SQL or LocalDB)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,9 +57,10 @@ var app = builder.Build();
 
 // --- 2. PIPELINE CONFIGURATION ---
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || true) // Enable Swagger in production for testing
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 // Ensure the Cosmos Database and SQL Database are created/migrated at startup
