@@ -33,8 +33,8 @@ public static class MauiProgram
         builder.Services.AddTransient<SuggestionsViewModel>();
         builder.Services.AddTransient<NewsViewModel>();
         builder.Services.AddTransient<SentimentViewModel>();
-        builder.Services.AddTransient<PortfolioViewModel>();
-        builder.Services.AddTransient<AlertsViewModel>();
+        builder.Services.AddSingleton<PortfolioViewModel>();
+        builder.Services.AddSingleton<AlertsViewModel>();
 
         // Views
         builder.Services.AddTransient<SuggestionsPage>();

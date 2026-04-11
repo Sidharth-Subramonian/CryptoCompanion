@@ -8,19 +8,19 @@
     Title="CryptoCompanion">
 
     <TabBar>
-        <Tab Title="Suggestions" Icon="dotnet_bot.png">
+        <Tab Title="Suggestions">
             <ShellContent ContentTemplate="{DataTemplate views:SuggestionsPage}" Route="SuggestionsPage" />
         </Tab>
-        <Tab Title="News" Icon="dotnet_bot.png">
+        <Tab Title="News">
             <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" Route="NewsPage" />
         </Tab>
-        <Tab Title="Sentiment" Icon="dotnet_bot.png">
+        <Tab Title="Sentiment">
             <ShellContent ContentTemplate="{DataTemplate views:SentimentPage}" Route="SentimentPage" />
         </Tab>
-        <Tab Title="Portfolio" Icon="dotnet_bot.png">
+        <Tab Title="Portfolio">
             <ShellContent ContentTemplate="{DataTemplate views:PortfolioPage}" Route="PortfolioPage" />
         </Tab>
-        <Tab Title="Alerts" Icon="dotnet_bot.png">
+        <Tab Title="Alerts">
             <ShellContent ContentTemplate="{DataTemplate views:AlertsPage}" Route="AlertsPage" />
         </Tab>
     </TabBar>

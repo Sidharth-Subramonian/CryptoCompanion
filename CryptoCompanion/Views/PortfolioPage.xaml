@@ -2,9 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CryptoCompanion.ViewModels"
+             xmlns:converters="clr-namespace:CryptoCompanion.Converters"
              x:DataType="viewmodels:PortfolioViewModel"
              x:Class="CryptoCompanion.Views.PortfolioPage"
              Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="24,20">
@@ -61,6 +68,31 @@
                                FontSize="14" FontAttributes="Bold"
                                HorizontalOptions="Center" />
                     </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Exchange Integration Card -->
+            <Border BackgroundColor="{StaticResource CardBg}"
+                    Stroke="{StaticResource Primary}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16" Padding="24">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="COINDCX INTEGRATION" FontSize="11" FontAttributes="Bold"
+                           TextColor="{StaticResource TextMuted}" />
+                    
+                    <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsLinked}">
+                        <Label Text="Account Linked Status: Active 🟢" TextColor="{StaticResource GreenNeon}" VerticalOptions="Center"/>
+                        <Button Grid.Column="1" Text="Unlink" Command="{Binding UnlinkAccountCommand}" BackgroundColor="{StaticResource CardBgLight}" TextColor="{StaticResource RedNeon}" CornerRadius="6" Padding="10,5" FontSize="12" />
+                    </Grid>
+
+                    <VerticalStackLayout Spacing="10" IsVisible="{Binding IsLinked, Converter={x:StaticResource InvertedBoolConverter}}">
+                        <Frame BackgroundColor="{StaticResource CardBgLight}" CornerRadius="8" Padding="10,0" HasShadow="False" BorderColor="Transparent">
+                            <Entry Text="{Binding CoinDcxApiKey}" Placeholder="API Key" PlaceholderColor="{StaticResource TextMuted}" TextColor="{StaticResource TextPrimary}" />
+                        </Frame>
+                        <Frame BackgroundColor="{StaticResource CardBgLight}" CornerRadius="8" Padding="10,0" HasShadow="False" BorderColor="Transparent">
+                            <Entry Text="{Binding CoinDcxApiSecret}" Placeholder="API Secret" IsPassword="True" PlaceholderColor="{StaticResource TextMuted}" TextColor="{StaticResource TextPrimary}" />
+                        </Frame>
+                        <Button Text="Connect Account" Command="{Binding LinkCoinDcxAccountCommand}" BackgroundColor="{StaticResource Primary}" CornerRadius="10" Padding="18,10" FontSize="13" />
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
 

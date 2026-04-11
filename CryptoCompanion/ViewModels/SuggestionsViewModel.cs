@@ -58,22 +58,26 @@ public partial class SuggestionsViewModel : BaseViewModel
                 float ma50 = (float)asset.MovingAverage50d;
                 float rsi = (float)asset.RSIScore;
                 float volume = (float)asset.Volume24h;
-                float volChange = ma50 > 0 ? (float)(asset.Volume24h / asset.MarketCap) : 0.05f;
+                // Ensure realistic mock volume change instead of simple ratio
+                float volChange = asset.PercentChange24h > 0 ? 0.05f : -0.05f; 
                 float priceChange = (float)(asset.PercentChange24h / 100m);
 
                 float currentPrice = (float)asset.CurrentPrice;
                 float rawMa50 = (float)asset.MovingAverage50d;
                 float normMa50 = rawMa50 > 0 ? (currentPrice - rawMa50) / rawMa50 : 0f;
 
-                // Approximate missing relative features since backend only provides raw 50d/200d MA
-                float normMa10 = 0.01f;
-                float normMa20 = 0.02f;
-                float normVolatility = 0.05f; // mock scaled volatility
+                // Approximate missing relative features with realistic standard distributions
+                float normMa10 = normMa50 * 0.5f;
+                float normMa20 = normMa50 * 0.8f;
+                float normVolatility = 0.06f; // Standard daily crypto volatility ~6%
 
-                // Run ONNX inference with new signatures capturing the Regressor percentages
+                // Run ONNX inference
                 float predictedChange = _mlService.PredictPriceDirection(priceChange, normMa10, normMa20, normMa50, rsi, normVolatility, volChange);
-                var rankingScore = _mlService.PredictCryptoRanking(priceChange, normMa10, normMa20, normMa50, rsi, normVolatility, volChange);
+                var rankingScoreRaw = _mlService.PredictCryptoRanking(priceChange, normMa10, normMa20, normMa50, rsi, normVolatility, volChange);
                 
+                // Scale Ranking Score to 0-100 (assume typical range -20% to +20% -> 0 to 100)
+                int rankingScore = (int)Math.Clamp(50 + (rankingScoreRaw * 250), 0, 100);
+
                 // Real price prediction derived natively from model
                 decimal percentDiff = (decimal)(predictedChange * 100);
                 decimal predictedDecimal = asset.CurrentPrice * (1 + (decimal)predictedChange);
@@ -116,8 +120,8 @@ public partial class SuggestionsViewModel : BaseViewModel
 
                 string reasoning = string.Join("\n", reasons.Select(r => $"• {r}"));
 
-                string forecast = $"₹{asset.CurrentPrice:N2}  →  ₹{predictedDecimal:N2}  ({predictedChange.ToString("P1")})";
-                string rank = $"AI Strength Score: {rankingScore:N0}/100";
+                string forecast = $"₹{asset.CurrentPrice:N2}  →  ₹{predictedDecimal:N2}  ({predictedChange:P1})";
+                string rank = $"AI Strength Score: {rankingScore}/100";
 
                 scoredSuggestions.Add(new SuggestionModel
                 {
@@ -130,7 +134,7 @@ public partial class SuggestionsViewModel : BaseViewModel
                     CurrentPrice = asset.CurrentPrice,
                     PredictedPrice = predictedDecimal,
                     PercentDiff = percentDiff,
-                    RankingScore = rankingScore,
+                    RankingScore = rankingScoreRaw,
                     BackgroundKey = signal == "Bullish" ? "Primary" : signal == "Bearish" ? "Secondary" : "Gray600"
                 });
             }

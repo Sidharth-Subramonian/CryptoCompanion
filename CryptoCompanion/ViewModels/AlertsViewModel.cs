@@ -9,13 +9,15 @@ namespace CryptoCompanion.ViewModels;
 public partial class AlertsViewModel : BaseViewModel
 {
     private readonly IBackendApiService _apiService;
+    private readonly PortfolioViewModel _portfolioViewModel;
 
     [ObservableProperty]
     private ObservableCollection<AlertItem> _activeAlerts = new();
 
-    public AlertsViewModel(IBackendApiService apiService)
+    public AlertsViewModel(IBackendApiService apiService, PortfolioViewModel portfolioViewModel)
     {
         _apiService = apiService;
+        _portfolioViewModel = portfolioViewModel;
         Title = "Price & Volume Alerts";
         Task.Run(LoadAlertsAsync);
     }
@@ -33,12 +35,22 @@ public partial class AlertsViewModel : BaseViewModel
 
             if (alerts != null && alerts.Any())
             {
+                var portfolioSymbols = _portfolioViewModel.Assets.Select(a => a.Symbol).ToList();
+                
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     ActiveAlerts.Clear();
                     foreach (var alert in alerts)
                     {
-                        ActiveAlerts.Add(alert);
+                        if (portfolioSymbols.Any(s => alert.Message.Contains(s)))
+                        {
+                            alert.Title = $"⭐ PORTFOLIO ALERT: {alert.Title}";
+                            ActiveAlerts.Insert(0, alert);
+                        }
+                        else
+                        {
+                            ActiveAlerts.Add(alert);
+                        }
                     }
                 });
             }
