@@ -23,10 +23,10 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net10.0-android",
-          "net10.0-ios",
-          "net10.0-maccatalyst",
-          "net10.0-windows10.0.19041.0"
+          "net9.0-android",
+          "net9.0-ios",
+          "net9.0-maccatalyst",
+          "net9.0-windows10.0.19041.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -34,20 +34,20 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0-android36.0": {
-            "targetAlias": "net10.0-android",
+          "net9.0-android35.0": {
+            "targetAlias": "net9.0-android",
             "projectReferences": {}
           },
-          "net10.0-ios26.2": {
-            "targetAlias": "net10.0-ios",
+          "net9.0-ios26.2": {
+            "targetAlias": "net9.0-ios",
             "projectReferences": {}
           },
-          "net10.0-maccatalyst26.2": {
-            "targetAlias": "net10.0-maccatalyst",
+          "net9.0-maccatalyst26.2": {
+            "targetAlias": "net9.0-maccatalyst",
             "projectReferences": {}
           },
-          "net10.0-windows10.0.19041": {
-            "targetAlias": "net10.0-windows10.0.19041.0",
+          "net9.0-windows10.0.19041": {
+            "targetAlias": "net9.0-windows10.0.19041.0",
             "projectReferences": {}
           }
         },
@@ -59,13 +59,13 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
-        "net10.0-android36.0": {
-          "targetAlias": "net10.0-android",
+        "net9.0-android35.0": {
+          "targetAlias": "net9.0-android",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -73,15 +73,15 @@
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.ML.OnnxRuntime": {
               "target": "Package",
@@ -89,12 +89,12 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[10.0.20, )"
+              "version": "[9.0.120, )"
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )",
+              "version": "[9.0.13, )",
               "autoReferenced": true
             }
           },
@@ -111,25 +111,34 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.Android.Ref.35",
+              "version": "[35.0.105, 35.0.105]"
+            },
+            {
+              "name": "Microsoft.Android.Runtime.35.android-arm64",
+              "version": "[35.0.105, 35.0.105]"
+            },
+            {
+              "name": "Microsoft.Android.Runtime.35.android-x64",
+              "version": "[35.0.105, 35.0.105]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
+              "version": "[9.0.14, 9.0.14]"
             }
           ],
           "frameworkReferences": {
             "Microsoft.Android": {
               "privateAssets": "all"
             },
-            "Microsoft.Android.Runtimes": {
-              "privateAssets": "all"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         },
-        "net10.0-ios26.2": {
-          "targetAlias": "net10.0-ios",
+        "net9.0-ios26.2": {
+          "targetAlias": "net9.0-ios",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -137,15 +146,15 @@
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.ML.OnnxRuntime": {
               "target": "Package",
@@ -153,12 +162,12 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[10.0.20, )"
+              "version": "[9.0.120, )"
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )",
+              "version": "[9.0.13, )",
               "autoReferenced": true
             }
           },
@@ -175,15 +184,20 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.iOS.Ref.net9.0_26.2",
+              "version": "[26.2.9000, 26.2.9000]"
+            },
+            {
+              "name": "Microsoft.iOS.Runtime.iossimulator-x64.net9.0_26.2",
+              "version": "[26.2.9000, 26.2.9000]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
+              "version": "[9.0.14, 9.0.14]"
             }
           ],
           "frameworkReferences": {
             "Microsoft.iOS": {
-              "privateAssets": "all"
-            },
-            "Microsoft.iOS.Runtimes": {
               "privateAssets": "all"
             },
             "Microsoft.NETCore.App": {
@@ -192,8 +206,8 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         },
-        "net10.0-maccatalyst26.2": {
-          "targetAlias": "net10.0-maccatalyst",
+        "net9.0-maccatalyst26.2": {
+          "targetAlias": "net9.0-maccatalyst",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -201,15 +215,15 @@
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.ML.OnnxRuntime": {
               "target": "Package",
@@ -217,12 +231,12 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[10.0.20, )"
+              "version": "[9.0.120, )"
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )",
+              "version": "[9.0.13, )",
               "autoReferenced": true
             }
           },
@@ -240,15 +254,20 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.MacCatalyst.Ref.net9.0_26.2",
+              "version": "[26.2.9000, 26.2.9000]"
+            },
+            {
+              "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-x64.net9.0_26.2",
+              "version": "[26.2.9000, 26.2.9000]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
+              "version": "[9.0.14, 9.0.14]"
             }
           ],
           "frameworkReferences": {
             "Microsoft.MacCatalyst": {
-              "privateAssets": "all"
-            },
-            "Microsoft.MacCatalyst.Runtimes": {
               "privateAssets": "all"
             },
             "Microsoft.NETCore.App": {
@@ -257,8 +276,8 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         },
-        "net10.0-windows10.0.19041": {
-          "targetAlias": "net10.0-windows10.0.19041.0",
+        "net9.0-windows10.0.19041": {
+          "targetAlias": "net9.0-windows10.0.19041.0",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -266,15 +285,15 @@
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[10.0.5, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.ML.OnnxRuntime": {
               "target": "Package",
@@ -282,7 +301,7 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[10.0.20, )"
+              "version": "[9.0.120, )"
             }
           },
           "imports": [
@@ -310,7 +329,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -326,7 +345,7 @@
         "maccatalyst-x64": {
           "#import": []
         },
-        "win-x64": {
+        "win10-x64": {
           "#import": []
         }
       }

@@ -10,7 +10,7 @@ public partial class NewsPage : ContentPage
         BindingContext = viewModel;
     }
 
-    private async void OnReadArticleTapped(object sender, EventArgs e)
+    private async void OnReadArticleTapped(object? sender, EventArgs e)
     {
         if (sender is Label label &&
             label.GestureRecognizers.FirstOrDefault() is TapGestureRecognizer tap &&

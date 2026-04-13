@@ -11,14 +11,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.companyname.cryptocompanion")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PublisherName", "User Name")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "CryptoCompanion")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Version", "1.0.0.1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CryptoCompanion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1bee90f7c361ff8fbb6a71c7622bc687924c96c9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdb481e9e6521f0480b28f5cef27bc408b190d56")]
 [assembly: System.Reflection.AssemblyProductAttribute("CryptoCompanion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CryptoCompanion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

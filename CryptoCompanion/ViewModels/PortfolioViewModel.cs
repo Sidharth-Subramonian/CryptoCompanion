@@ -15,6 +15,9 @@ public partial class PortfolioViewModel : BaseViewModel
     private readonly IBackendApiService _apiService;
 
     [ObservableProperty]
+    private string _totalValueDisplay = "Calculating...";
+
+    [ObservableProperty]
     private string _portfolioRiskAnalysis;
 
     [ObservableProperty]

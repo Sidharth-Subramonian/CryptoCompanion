@@ -85,12 +85,12 @@
                     </Grid>
 
                     <VerticalStackLayout Spacing="10" IsVisible="{Binding IsLinked, Converter={x:StaticResource InvertedBoolConverter}}">
-                        <Frame BackgroundColor="{StaticResource CardBgLight}" CornerRadius="8" Padding="10,0" HasShadow="False" BorderColor="Transparent">
+                        <Border BackgroundColor="{StaticResource CardBgLight}" StrokeShape="RoundRectangle 8" Padding="10,0" StrokeThickness="0">
                             <Entry Text="{Binding CoinDcxApiKey}" Placeholder="API Key" PlaceholderColor="{StaticResource TextMuted}" TextColor="{StaticResource TextPrimary}" />
-                        </Frame>
-                        <Frame BackgroundColor="{StaticResource CardBgLight}" CornerRadius="8" Padding="10,0" HasShadow="False" BorderColor="Transparent">
+                        </Border>
+                        <Border BackgroundColor="{StaticResource CardBgLight}" StrokeShape="RoundRectangle 8" Padding="10,0" StrokeThickness="0">
                             <Entry Text="{Binding CoinDcxApiSecret}" Placeholder="API Secret" IsPassword="True" PlaceholderColor="{StaticResource TextMuted}" TextColor="{StaticResource TextPrimary}" />
-                        </Frame>
+                        </Border>
                         <Button Text="Connect Account" Command="{Binding LinkCoinDcxAccountCommand}" BackgroundColor="{StaticResource Primary}" CornerRadius="10" Padding="18,10" FontSize="13" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
