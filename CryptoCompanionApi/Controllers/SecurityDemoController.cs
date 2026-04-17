@@ -25,9 +25,8 @@ namespace CryptoCompanionApi.Controllers
             // This is easily exploited by passing: BTC' OR '1'='1
             string query = "SELECT * FROM CryptoAssets WHERE Symbol = '" + coinSymbol + "'";
             
-            // Execute the raw vulnerable query
-            var results = await _context.CryptoAssets
-                .FromSqlRaw(query)
+            // Execute the raw vulnerable query - Explictly use Relational provider to avoid ambiguity with Cosmos
+            var results = await RelationalQueryableExtensions.FromSqlRaw(_context.CryptoAssets, query)
                 .ToListAsync();
             
             return Ok(results);
@@ -40,8 +39,8 @@ namespace CryptoCompanionApi.Controllers
         {
             // GOOD PRACTICE: Using Parameterized queries
             // EF Core handles the escaping for us.
-            var results = await _context.CryptoAssets
-                .FromSqlRaw("SELECT * FROM CryptoAssets WHERE Symbol = {0}", coinSymbol)
+            // Explictly use Relational provider to avoid ambiguity with Cosmos
+            var results = await RelationalQueryableExtensions.FromSqlRaw(_context.CryptoAssets, "SELECT * FROM CryptoAssets WHERE Symbol = {0}", coinSymbol)
                 .ToListAsync();
             
             return Ok(results);
