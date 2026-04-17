@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoCompanion.Services.Api;
 using CryptoCompanion.Models; // Ensure this points to your MAUI NewsArticle model
+using System.Linq;
 
 namespace CryptoCompanion.ViewModels;
 
@@ -42,6 +43,10 @@ public partial class NewsViewModel : BaseViewModel
                     NewsArticles.Clear();
                     foreach (var article in news)
                     {
+                        if (string.IsNullOrEmpty(article.SentimentLabel) || article.SentimentLabel == "Neutral")
+                        {
+                            article.SentimentLabel = AnalyzeSentiment(article.Title + " " + article.Summary);
+                        }
                         NewsArticles.Add(article);
                     }
                 });
@@ -64,5 +69,25 @@ public partial class NewsViewModel : BaseViewModel
         {
             await Launcher.Default.OpenAsync(new Uri(url));
         }
+    }
+
+    private static readonly string[] BullishKeywords = { "bullish", "surge", "rally", "moon", "breakout", "gains", "soar", "rise", "up", "high", "record", "growth", "positive", "buy", "profit", "boost" };
+    private static readonly string[] BearishKeywords = { "bearish", "crash", "dump", "plunge", "sell", "drop", "down", "low", "fall", "decline", "loss", "negative", "fear", "risk", "warning", "collapse" };
+
+    private static string AnalyzeSentiment(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return "Neutral";
+        
+        var lowerText = text.ToLowerInvariant();
+        
+        int bullishCount = BullishKeywords.Count(k => lowerText.Contains(k));
+        int bearishCount = BearishKeywords.Count(k => lowerText.Contains(k));
+        int totalHits = bullishCount + bearishCount;
+
+        if (totalHits == 0) return "Neutral";
+        if (bullishCount > bearishCount) return "Bullish";
+        if (bearishCount > bullishCount) return "Bearish";
+        
+        return "Neutral";
     }
 }

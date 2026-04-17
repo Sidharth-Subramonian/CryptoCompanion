@@ -18,6 +18,9 @@ public partial class SuggestionsViewModel : BaseViewModel
     [ObservableProperty]
     private string _btcRank;
 
+    [ObservableProperty]
+    private string _aiStatusText = "System Standby";
+
     public ObservableCollection<SuggestionModel> Suggestions { get; set; } = new();
 
     public bool IsEmpty => !IsBusy && Suggestions.Count == 0;
@@ -34,21 +37,26 @@ public partial class SuggestionsViewModel : BaseViewModel
     [RelayCommand]
     public async Task RunMlPredictionsAsync()
     {
-        try
-        {
-            IsBusy = true;
+        try { 
+            AiStatusText = "Fetching live global market streams...";
+            await Task.Delay(400); // Simulate processing weight
 
-            // Fetch real crypto asset data from the API
             var assets = await _apiService.GetSuggestionsAsync();
             
             if (assets == null || !assets.Any())
             {
+                AiStatusText = "Data stream failed.";
                 BtcForecast = "No data from API. Is the backend running?";
-                BtcRank = "Start the API with: dotnet run";
                 return;
             }
 
+            AiStatusText = "Initializing ONNX Neural Engine...";
+            await Task.Delay(600); 
+
             await _mlService.InitializeAsync();
+
+            AiStatusText = $"Running Deep Analysis on {assets.Count} Assets...";
+            await Task.Delay(600);
 
             // Run ML on ALL assets, not just top 5
             var scoredSuggestions = new List<SuggestionModel>();
@@ -151,6 +159,7 @@ public partial class SuggestionsViewModel : BaseViewModel
                 Suggestions.Add(suggestion);
             }
 
+            AiStatusText = "Analysis Complete";
             BtcForecast = $"Top {Suggestions.Count} picks from {assets.Count} coins analyzed";
             BtcRank = $"Ranked by AI Strength Score • {DateTime.Now:HH:mm:ss}";
         }

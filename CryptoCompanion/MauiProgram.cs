@@ -3,6 +3,8 @@ using CryptoCompanion.Services.ML;
 using CryptoCompanion.ViewModels;
 using CryptoCompanion.Views;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace CryptoCompanion;
 
@@ -13,6 +15,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            .UseSkiaSharp()
+            .UseLiveCharts()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CryptoCompanion.ViewModels"
              xmlns:converters="clr-namespace:CryptoCompanion.Converters"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:DataType="viewmodels:PortfolioViewModel"
              x:Class="CryptoCompanion.Views.PortfolioPage"
              Title="{Binding Title}">
@@ -20,18 +21,28 @@
             <Label Text="💼 Portfolio" FontSize="28" FontAttributes="Bold"
                    TextColor="{StaticResource TextPrimary}" />
 
-            <!-- Total Value Card -->
-            <Border BackgroundColor="{StaticResource CardBg}"
-                    Stroke="{StaticResource Primary}" StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16" Padding="24">
+            <!-- Total Value Card with Glowing Gradient -->
+            <Border StrokeThickness="1" StrokeShape="RoundRectangle 20" Padding="24">
+                <Border.Stroke>
+                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{StaticResource Primary}" Offset="0.0" />
+                        <GradientStop Color="#00000000" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#1A2332" Offset="0.0" />
+                        <GradientStop Color="#0A0E1A" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="TOTAL VALUE" FontSize="11" FontAttributes="Bold"
-                           TextColor="{StaticResource TextMuted}" />
-                    <Label Text="{Binding TotalValueDisplay, StringFormat='₹{0}'}"
-                           FontSize="36" FontAttributes="Bold"
-                           TextColor="{StaticResource Accent}" />
-                    <Label Text="Based on top assets by market cap"
-                           FontSize="12" TextColor="{StaticResource TextSecondary}" />
+                    <Label Text="TOTAL BALANCE" FontSize="11" FontAttributes="Bold"
+                           TextColor="{StaticResource TextSecondary}" CharacterSpacing="1" />
+                    <Label Text="{Binding TotalValueDisplay}"
+                           FontSize="42" FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label Text="Connected to LIVE exchanges"
+                           FontSize="12" TextColor="{StaticResource Accent}" />
                 </VerticalStackLayout>
             </Border>
 
@@ -97,9 +108,11 @@
             </Border>
 
             <!-- Holdings Section -->
-            <Label Text="HOLDINGS BREAKDOWN" FontSize="11" FontAttributes="Bold"
-                   TextColor="{StaticResource TextMuted}" Margin="0,4,0,0" />
-
+            <Label Text="PORTFOLIO ALLOCATION" FontSize="11" FontAttributes="Bold"
+                   TextColor="{StaticResource TextMuted}" Margin="0,10,0,0" CharacterSpacing="1" />
+            
+            <lvc:PieChart Series="{Binding PortfolioSeries}" HeightRequest="250" Margin="0,10,0,20"/>
+            
             <CollectionView ItemsSource="{Binding Assets}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels:PortfolioAsset">
@@ -131,7 +144,7 @@
                                        FontSize="11" TextColor="{StaticResource TextMuted}" />
                                 <!-- Value -->
                                 <Label Grid.RowSpan="2" Grid.Column="2"
-                                       Text="{Binding Value, StringFormat='₹{0:N0}'}"
+                                       Text="{Binding Value, StringFormat='Rs. {0:N0}'}"
                                        FontSize="18" FontAttributes="Bold"
                                        TextColor="{StaticResource TextPrimary}"
                                        VerticalOptions="Center" />

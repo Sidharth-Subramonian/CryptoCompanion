@@ -66,4 +66,30 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- Premium Gradients -->
+    <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource Primary}" Offset="0.0" />
+        <GradientStop Color="{StaticResource Secondary}" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SuccessGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#059669" Offset="0.0" />
+        <GradientStop Color="#10B981" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DangerGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#B91C1C" Offset="0.0" />
+        <GradientStop Color="#EF4444" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AiGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#6366F1" Offset="0.0" />
+        <GradientStop Color="#D946EF" Offset="1.0" />
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="CardGlowGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#1E293B" Offset="0.0" />
+        <GradientStop Color="#0F172A" Offset="1.0" />
+    </LinearGradientBrush>
 </ResourceDictionary>

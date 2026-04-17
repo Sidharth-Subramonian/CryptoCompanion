@@ -19,6 +19,9 @@ public class NewsDataWorker : BackgroundService, INewsDataService
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
 
+    private static readonly string[] BullishKeywords = { "bullish", "surge", "rally", "moon", "breakout", "gains", "soar", "rise", "up", "high", "record", "growth", "positive", "buy", "profit", "boost" };
+    private static readonly string[] BearishKeywords = { "bearish", "crash", "dump", "plunge", "sell", "drop", "down", "low", "fall", "decline", "loss", "negative", "fear", "risk", "warning", "collapse" };
+
     public NewsDataWorker(
         ILogger<NewsDataWorker> logger, 
         IServiceProvider serviceProvider, 
@@ -92,6 +95,9 @@ public class NewsDataWorker : BackgroundService, INewsDataService
 
             if (existingArticle == null)
             {
+                var textForSentiment = apiArticle.Title + " " + apiArticle.Body;
+                var sentimentLabel = AnalyzeSentiment(textForSentiment);
+
                 cosmosDb.NewsArticles.Add(new NewsArticle
                 {
                     Title = apiArticle.Title,
@@ -99,7 +105,8 @@ public class NewsDataWorker : BackgroundService, INewsDataService
                     Url = apiArticle.Url,
                     Source = apiArticle.Source,
                     PublishedAt = DateTimeOffset.FromUnixTimeSeconds(apiArticle.PublishedOn).DateTime,
-                    RelatedCoins = apiArticle.Tags?.Split('|').ToList() ?? new List<string>()
+                    RelatedCoins = apiArticle.Tags?.Split('|').ToList() ?? new List<string>(),
+                    SentimentLabel = sentimentLabel
                 });
                 newArticlesCount++;
             }
@@ -116,6 +123,23 @@ public class NewsDataWorker : BackgroundService, INewsDataService
         _logger.LogError(ex, "Failed to sync news. Check if the API Key is valid in appsettings.");
     }
 }
+
+    private static string AnalyzeSentiment(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return "Neutral";
+        
+        var lowerText = text.ToLowerInvariant();
+        
+        int bullishCount = BullishKeywords.Count(k => lowerText.Contains(k));
+        int bearishCount = BearishKeywords.Count(k => lowerText.Contains(k));
+        int totalHits = bullishCount + bearishCount;
+
+        if (totalHits == 0) return "Neutral";
+        if (bullishCount > bearishCount) return "Bullish";
+        if (bearishCount > bullishCount) return "Bearish";
+        
+        return "Neutral";
+    }
 }
 
 // --- DATA TRANSFER OBJECTS (DTOs) ---

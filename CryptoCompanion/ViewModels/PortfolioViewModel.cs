@@ -6,7 +6,10 @@ using CryptoCompanion.Services.Api;
 using System.Text.Json;
 using System.Text;
 using System.Security.Cryptography;
-
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 namespace CryptoCompanion.ViewModels;
 
 public partial class PortfolioViewModel : BaseViewModel
@@ -23,6 +26,8 @@ public partial class PortfolioViewModel : BaseViewModel
     [ObservableProperty]
     private ObservableCollection<PortfolioAsset> _assets = new();
 
+    [ObservableProperty]
+    private ISeries[] _portfolioSeries = Array.Empty<ISeries>();
     [ObservableProperty]
     private string _coinDcxApiKey = string.Empty;
 
@@ -107,11 +112,23 @@ public partial class PortfolioViewModel : BaseViewModel
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Assets.Clear();
+                var pieSeries = new List<ISeries>();
+                int colorIdx = 0;
+                var colors = new[] { SKColor.Parse("#6366F1"), SKColor.Parse("#D946EF"), SKColor.Parse("#22D3EE"), SKColor.Parse("#10B981"), SKColor.Parse("#F59E0B") };
                 foreach (var pa in portfolioAssets)
                 {
                     Assets.Add(pa);
+                    pieSeries.Add(new PieSeries<decimal>
+                    {
+                        Name = pa.Symbol,
+                        Values = new decimal[] { pa.Value },
+                        Fill = new SolidColorPaint(colors[colorIdx % colors.Length]),
+                        InnerRadius = 60
+                    });
+                    colorIdx++;
                 }
-                TotalValueDisplay = $"₹{totalValue:N2}";
+                PortfolioSeries = pieSeries.ToArray();
+                TotalValueDisplay = $"Rs. {totalValue:N2}";
             });
     }
 
@@ -141,11 +158,14 @@ public partial class PortfolioViewModel : BaseViewModel
     {
         try
         {
+            string apiKey = CoinDcxApiKey?.Trim() ?? string.Empty;
+            string apiSecret = CoinDcxApiSecret?.Trim() ?? string.Empty;
+
             var timeStamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var payload = new { timestamp = timeStamp };
             var jsonPayload = JsonSerializer.Serialize(payload);
 
-            byte[] secretBytes = Encoding.UTF8.GetBytes(CoinDcxApiSecret);
+            byte[] secretBytes = Encoding.UTF8.GetBytes(apiSecret);
             byte[] payloadBytes = Encoding.UTF8.GetBytes(jsonPayload);
 
             using var hmac = new HMACSHA256(secretBytes);
@@ -154,7 +174,11 @@ public partial class PortfolioViewModel : BaseViewModel
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "exchange/v1/users/balances");
             request.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-            request.Headers.Add("X-AUTH-APIKEY", CoinDcxApiKey);
+            
+            // Critical fix: Many crypto APIs reject requests if the header is 'application/json; charset=utf-8'
+            request.Content.Headers.ContentType.CharSet = string.Empty; 
+            
+            request.Headers.Add("X-AUTH-APIKEY", apiKey);
             request.Headers.Add("X-AUTH-SIGNATURE", signature);
 
             var response = await _httpClient.SendAsync(request);
@@ -164,7 +188,8 @@ public partial class PortfolioViewModel : BaseViewModel
                 var errorText = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine($"CoinDCX API Error: {errorText}");
                 await LoadSimulatedPortfolioAsync();
-                TotalValueDisplay = "Invalid API Keys (Showing Simulation)";
+                TotalValueDisplay = $"API Error: {(int)response.StatusCode}";
+                PortfolioRiskAnalysis = $"Reason: {errorText}";
                 return;
             }
 
@@ -176,11 +201,25 @@ public partial class PortfolioViewModel : BaseViewModel
 
             if (balances != null)
             {
+                // Fetch real prices from our API
+                var cryptoAssets = await _apiService.GetSuggestionsAsync() ?? new List<Models.CryptoAsset>();
+                var priceLookup = cryptoAssets.ToDictionary(a => a.Symbol.Split('-')[0].ToUpper(), a => a.CurrentPrice);
+
                 foreach (var balance in balances.Where(b => b.Balance > 0))
                 {
-                    // Mock price to calculate value (a real app would fetch ticker prices)
-                    decimal mockPrice = balance.Currency == "BTC" ? 5000000m : balance.Currency == "ETH" ? 250000m : 1000m;
-                    decimal holdingValue = balance.Balance * mockPrice;
+                    string currency = balance.Currency.ToUpper();
+                    decimal realPrice = 0m;
+
+                    if (currency == "INR")
+                    {
+                        realPrice = 1m; 
+                    }
+                    else if (priceLookup.TryGetValue(currency, out decimal livePrice))
+                    {
+                        realPrice = livePrice;
+                    }
+
+                    decimal holdingValue = balance.Balance * realPrice;
                     totalValue += holdingValue;
 
                     portfolioAssets.Add(new PortfolioAsset
@@ -200,11 +239,24 @@ public partial class PortfolioViewModel : BaseViewModel
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Assets.Clear();
+                var pieSeries = new List<ISeries>();
+                int colorIdx = 0;
+                var colors = new[] { SKColor.Parse("#6366F1"), SKColor.Parse("#D946EF"), SKColor.Parse("#22D3EE"), SKColor.Parse("#10B981"), SKColor.Parse("#F59E0B") };
+
                 foreach (var pa in portfolioAssets.OrderByDescending(a => a.Value))
                 {
                     Assets.Add(pa);
+                    pieSeries.Add(new PieSeries<decimal>
+                    {
+                        Name = pa.Symbol,
+                        Values = new decimal[] { pa.Value },
+                        Fill = new SolidColorPaint(colors[colorIdx % colors.Length]),
+                        InnerRadius = 50
+                    });
+                    colorIdx++;
                 }
-                TotalValueDisplay = $"₹{totalValue:N2}";
+                PortfolioSeries = pieSeries.ToArray();
+                TotalValueDisplay = $"Rs. {totalValue:N2}";
             });
         }
         catch (Exception ex)

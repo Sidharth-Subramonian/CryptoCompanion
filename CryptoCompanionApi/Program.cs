@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Swagger/OpenAPI support (.NET 8 standard)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationInsightsTelemetry();
 
 // Register SQL Database Context (Azure SQL or LocalDB)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -55,6 +56,9 @@ builder.Services.AddHostedService<SentimentDataWorker>();
 
 // Register Controllers
 builder.Services.AddControllers();
+
+// Register AI Advisor
+builder.Services.AddScoped<IAiAdvisorService, AzureOpenAiAdvisorService>();
 
 var app = builder.Build();
 

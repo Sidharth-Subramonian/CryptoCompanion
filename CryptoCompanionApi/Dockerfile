@@ -3,12 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy csproj and restore
-COPY ["CryptoCompanionApi/CryptoCompanionApi.csproj", "CryptoCompanionApi/"]
-RUN dotnet restore "CryptoCompanionApi/CryptoCompanionApi.csproj"
+COPY ["CryptoCompanionApi.csproj", "./"]
+RUN dotnet restore "CryptoCompanionApi.csproj"
 
 # Copy the rest of the code
 COPY . .
-WORKDIR "/src/CryptoCompanionApi"
 RUN dotnet build "CryptoCompanionApi.csproj" -c Release -o /app/build
 
 # Publish Stage

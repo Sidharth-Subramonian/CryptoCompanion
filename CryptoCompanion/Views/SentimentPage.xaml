@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CryptoCompanion.ViewModels"
              xmlns:models="clr-namespace:CryptoCompanion.Models"
+             xmlns:converters="clr-namespace:CryptoCompanion.Converters"
              x:DataType="viewmodels:SentimentViewModel"
              x:Class="CryptoCompanion.Views.SentimentPage"
              Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SentimentToColorConverter x:Key="SentimentToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="24,20">
@@ -129,7 +136,7 @@
                                 <HorizontalStackLayout Spacing="6">
                                     <Label Text="{Binding SentimentClass}" FontSize="12"
                                            FontAttributes="Bold"
-                                           TextColor="{StaticResource GreenNeon}" />
+                                           TextColor="{Binding SentimentClass, Converter={StaticResource SentimentToColorConverter}}" />
                                     <Label Text="{Binding Confidence, StringFormat='({0:P0})'}"
                                            FontSize="12" TextColor="{StaticResource TextMuted}" />
                                 </HorizontalStackLayout>

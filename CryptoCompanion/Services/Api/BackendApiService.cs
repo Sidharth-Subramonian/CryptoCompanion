@@ -16,7 +16,12 @@ public interface IBackendApiService
 public class BackendApiService : IBackendApiService
 {
     private readonly HttpClient _httpClient;
-    private const string BaseUrl = "https://cryptocompanion-api-2101242956.azurewebsites.net"; 
+    // Azure App Service endpoint (used previously)
+    // private const string BaseUrl = "https://cryptocompanion-api-2101242956.azurewebsites.net"; 
+    
+    // Kubernetes (AKS) LoadBalancer External IP 
+    // TODO: Replace with actual IP from `kubectl get services` after deploying to AKS.
+    private const string BaseUrl = "http://<YOUR_AKS_EXTERNAL_IP>"; 
 
     public BackendApiService(HttpClient httpClient)
     {

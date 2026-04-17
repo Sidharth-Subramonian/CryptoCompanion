@@ -71,6 +71,10 @@
               "target": "Package",
               "version": "[8.4.0, )"
             },
+            "LiveChartsCore.SkiaSharpView.Maui": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[9.0.9, )"
@@ -144,6 +148,10 @@
               "target": "Package",
               "version": "[8.4.0, )"
             },
+            "LiveChartsCore.SkiaSharpView.Maui": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[9.0.9, )"
@@ -212,6 +220,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.4.0, )"
+            },
+            "LiveChartsCore.SkiaSharpView.Maui": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -282,6 +294,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.4.0, )"
+            },
+            "LiveChartsCore.SkiaSharpView.Maui": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",

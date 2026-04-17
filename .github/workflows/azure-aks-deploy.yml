@@ -1,0 +1,59 @@
+name: AKS CI/CD - Build and Push to ACR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CryptoCompanionApi/**'
+      - '.github/workflows/azure-aks-deploy.yml'
+  workflow_dispatch:
+
+env:
+  ACR_NAME: 'cryptocompanionacr7638'
+  IMAGE_NAME: 'cryptocompanionapi'
+  CLUSTER_NAME: 'cryptocompanion-aks'
+  RESOURCE_GROUP: 'rg-cryptocompanion-prod'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to Azure Container Registry
+        run: az acr login --name ${{ env.ACR_NAME }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} -t ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest ./CryptoCompanionApi
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
+  deploy-to-aks:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set AKS Context
+        uses: azure/aks-set-context@v3
+        with:
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.RESOURCE_GROUP }}
+
+      - name: Rollout Restart Deployment
+        run: |
+          kubectl rollout restart deployment/cryptocompanion-api
