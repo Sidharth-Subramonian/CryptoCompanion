@@ -23,19 +23,32 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
         - name: ConnectionStrings__DefaultConnection
-          value: "Server=tcp:sql-cryptocompanion-fixed.database.windows.net,1433;Initial Catalog=CryptoCompanionDb;Persist Security Info=False;User ID=azureuser;Password=Changeme@315;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: sql-connection-string
         - name: ConnectionStrings__CosmosDbAccountEndpoint
-          value: "https://cosmos-cryptocompanion-31374255.documents.azure.com:443/"
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: cosmos-endpoint
         - name: ConnectionStrings__CosmosDbAccountKey
-          value: "jVKhsyOM2OBlP4kSqVDB9ihs9RrkjK2qW01cXwERtOElcVMDO4xuqUfObHZILcRdjqZ7OZ4BWxcBACDbOUHCug=="
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: cosmos-key
         - name: OpenAI__Endpoint
-          value: "https://cryptocompanion-ai-sw722.openai.azure.com/"
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: openai-endpoint
         - name: OpenAI__Key
-          value: "6ktPbgxTYHHwyo5oVLM0Htn9Twe25VbBE4Orojf4navZJC4xu5MbJQQJ99CDACfhMk5XJ3w3AAABACOGYL5o"
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: openai-key
         - name: OpenAI__DeploymentName
           value: "advisor-v1"
-        # Connection strings should be mapped to K8s secrets or Key Vault in production
-        # For simplicity in Review II, we can use the environment variables as in App Service
 ---
 apiVersion: v1
 kind: Service
