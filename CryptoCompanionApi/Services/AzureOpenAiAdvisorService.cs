@@ -11,18 +11,32 @@ namespace CryptoCompanionApi.Services;
 
 public class AzureOpenAiAdvisorService : IAiAdvisorService
 {
-    private readonly OpenAIClient _client;
+    private readonly OpenAIClient? _client;
     private readonly string _deploymentName;
     private readonly TelemetryClient _telemetryClient;
+    private readonly bool _isConfigured;
+    private readonly string _configError;
 
     public AzureOpenAiAdvisorService(IConfiguration configuration, TelemetryClient telemetryClient)
     {
-        var endpoint = configuration["OpenAI:Endpoint"] ?? throw new ArgumentNullException("OpenAI:Endpoint is missing");
-        var key = configuration["OpenAI:Key"] ?? throw new ArgumentNullException("OpenAI:Key is missing");
-        _deploymentName = configuration["OpenAI:DeploymentName"] ?? "advisor-v1";
         _telemetryClient = telemetryClient;
+        _deploymentName = configuration["OpenAI:DeploymentName"] ?? "advisor-v1";
 
-        _client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+        var endpoint = configuration["OpenAI:Endpoint"];
+        var key = configuration["OpenAI:Key"];
+
+        if (string.IsNullOrEmpty(endpoint) || string.IsNullOrEmpty(key))
+        {
+            _isConfigured = false;
+            _configError = $"OpenAI is not configured. Endpoint present: {!string.IsNullOrEmpty(endpoint)}, Key present: {!string.IsNullOrEmpty(key)}";
+            _client = null;
+        }
+        else
+        {
+            _isConfigured = true;
+            _configError = string.Empty;
+            _client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+        }
     }
 
     public async Task<string> GetMarketIntelligenceAsync(List<CryptoAsset> topAssets, List<NewsArticle> latestNews)
@@ -42,6 +56,11 @@ public class AzureOpenAiAdvisorService : IAiAdvisorService
             Temperature = 0.7f
         };
 
+        if (!_isConfigured || _client == null)
+        {
+            return $"AI Advisor offline: {_configError}";
+        }
+
         try 
         {
             Response<ChatCompletions> response = await _client.GetChatCompletionsAsync(chatCompletionsOptions);
@@ -59,7 +78,8 @@ public class AzureOpenAiAdvisorService : IAiAdvisorService
             // Track failure
             _telemetryClient.TrackException(ex);
             _telemetryClient.TrackRequest("OpenAI_MarketIntelligence", DateTimeOffset.UtcNow, stopwatch.Elapsed, "500", false);
-            throw;
+            // Don't rethrow — AI failure should not take down the whole endpoint
+            return $"AI Advisor error: {ex.Message}";
         }
     }
 

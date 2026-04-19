@@ -37,6 +37,11 @@ spec:
             secretKeyRef:
               name: cryptocompanion-secrets
               key: cosmos-key
+        - name: ConnectionStrings__CosmosDbConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: cryptocompanion-secrets
+              key: cosmos-connection-string
         - name: OpenAI__Endpoint
           valueFrom:
             secretKeyRef:

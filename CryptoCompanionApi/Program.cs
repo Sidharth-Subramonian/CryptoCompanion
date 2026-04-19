@@ -22,28 +22,46 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register Cosmos Database Context (Azure Cloud or Local Emulator)
 builder.Services.AddDbContext<CosmosDbContext>(options =>
 {
-    var endpoint = builder.Configuration.GetConnectionString("CosmosDbAccountEndpoint") 
-                   ?? "https://localhost:8081/";
-    var key = builder.Configuration.GetConnectionString("CosmosDbAccountKey") 
-              ?? "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
-
-    options.UseCosmos(
-        endpoint,
-        key,
-        databaseName: "CryptoCompanionDb",
-        cosmosOptionsAction: cosmosOptions =>
-        {
-            if (builder.Environment.IsDevelopment())
+    // Prefer a single full connection string (most reliable for production)
+    var cosmosConnStr = builder.Configuration.GetConnectionString("CosmosDbConnectionString");
+    
+    if (!string.IsNullOrEmpty(cosmosConnStr) && cosmosConnStr != "SET_BY_K8S_SECRET")
+    {
+        Console.WriteLine("Cosmos DB: Using full connection string.");
+        options.UseCosmos(
+            cosmosConnStr,
+            databaseName: "CryptoCompanionDb",
+            cosmosOptionsAction: cosmosOptions =>
             {
-                // BYPASS SSL for Local Emulator only
-                cosmosOptions.HttpClientFactory(() => new HttpClient(new HttpClientHandler
-                {
-                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                }));
+                // Use Gateway mode — works reliably in all Azure environments
                 cosmosOptions.ConnectionMode(ConnectionMode.Gateway);
-            }
-            // In Production (Azure), use default Direct mode — no SSL bypass needed
-        });
+            });
+    }
+    else
+    {
+        // Fallback: separate endpoint + key (for local emulator)
+        var endpoint = builder.Configuration.GetConnectionString("CosmosDbAccountEndpoint") 
+                       ?? "https://localhost:8081/";
+        var key = builder.Configuration.GetConnectionString("CosmosDbAccountKey") 
+                  ?? "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+
+        Console.WriteLine($"Cosmos DB: Using separate endpoint+key. Endpoint: {endpoint}");
+        options.UseCosmos(
+            endpoint,
+            key,
+            databaseName: "CryptoCompanionDb",
+            cosmosOptionsAction: cosmosOptions =>
+            {
+                if (builder.Environment.IsDevelopment())
+                {
+                    cosmosOptions.HttpClientFactory(() => new HttpClient(new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    }));
+                }
+                cosmosOptions.ConnectionMode(ConnectionMode.Gateway);
+            });
+    }
 });
 
 // Register HttpClient (Shared instance for your workers)

@@ -21,7 +21,7 @@ public class BackendApiService : IBackendApiService
     
     // Kubernetes (AKS) LoadBalancer External IP 
     // TODO: Replace with actual IP from `kubectl get services` after deploying to AKS.
-    private const string BaseUrl = "http://<YOUR_AKS_EXTERNAL_IP>"; 
+    private const string BaseUrl = "http://40.88.237.159"; 
 
     public BackendApiService(HttpClient httpClient)
     {
@@ -36,7 +36,9 @@ public class BackendApiService : IBackendApiService
             var response = await _httpClient.GetAsync("/api/suggestions");
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<List<CryptoAsset>>();
+                // API returns a wrapper object: { Assets: [...], MarketIntelligence: "...", ReviewNote: "..." }
+                var result = await response.Content.ReadFromJsonAsync<SuggestionsApiResponse>();
+                return result?.Assets ?? new List<CryptoAsset>();
             }
         }
         catch (Exception ex)
@@ -44,6 +46,14 @@ public class BackendApiService : IBackendApiService
             Debug.WriteLine($"API Error (Suggestions): {ex.Message}");
         }
         return new List<CryptoAsset>();
+    }
+
+    // Matches the shape returned by /api/suggestions
+    private class SuggestionsApiResponse
+    {
+        public List<CryptoAsset>? Assets { get; set; }
+        public string? MarketIntelligence { get; set; }
+        public string? ReviewNote { get; set; }
     }
 
     public async Task<List<NewsArticle>?> GetLatestNewsAsync()

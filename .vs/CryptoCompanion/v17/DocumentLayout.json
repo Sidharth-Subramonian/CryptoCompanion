@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|c:\\users\\sidha\\onedrive\\documents\\cryptocompanion\\cryptocompanion\\services\\api\\backendapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|solutionrelative:cryptocompanion\\services\\api\\backendapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|c:\\users\\sidha\\onedrive\\documents\\cryptocompanion\\cryptocompanion\\views\\suggestionspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|solutionrelative:cryptocompanion\\views\\suggestionspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -52,10 +56,6 @@
       "RelativeMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|solutionrelative:cryptocompanion\\views\\sentimentpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|c:\\users\\sidha\\onedrive\\documents\\cryptocompanion\\cryptocompanion\\services\\api\\backendapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|solutionrelative:cryptocompanion\\services\\api\\backendapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|c:\\users\\sidha\\onedrive\\documents\\cryptocompanion\\cryptocompanion\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{BCDC8E89-F768-F01D-0F50-CE24BA1AB3A3}|CryptoCompanion\\CryptoCompanion.csproj|solutionrelative:cryptocompanion\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -79,27 +79,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "CryptoCompanion\\MauiProgram.cs",
-              "ToolTip": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\MauiProgram.cs",
-              "RelativeToolTip": "CryptoCompanion\\MauiProgram.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBEAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T10:29:36.909Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "SuggestionsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\ViewModels\\SuggestionsViewModel.cs",
               "RelativeDocumentMoniker": "CryptoCompanion\\ViewModels\\SuggestionsViewModel.cs",
@@ -111,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "InvertedBoolConverter.cs",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Converters\\InvertedBoolConverter.cs",
               "RelativeDocumentMoniker": "CryptoCompanion\\Converters\\InvertedBoolConverter.cs",
@@ -123,7 +107,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "NewsDataWorker.cs",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanionApi\\Services\\NewsDataWorker.cs",
               "RelativeDocumentMoniker": "CryptoCompanionApi\\Services\\NewsDataWorker.cs",
@@ -135,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "NewsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\ViewModels\\NewsViewModel.cs",
               "RelativeDocumentMoniker": "CryptoCompanion\\ViewModels\\NewsViewModel.cs",
@@ -147,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "SuggestionsPage.xaml",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Views\\SuggestionsPage.xaml",
               "RelativeDocumentMoniker": "CryptoCompanion\\Views\\SuggestionsPage.xaml",
@@ -155,12 +139,40 @@
               "RelativeToolTip": "CryptoCompanion\\Views\\SuggestionsPage.xaml",
               "ViewState": "AgIAADEAAAAAAAAAAAAYwD4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-18T11:07:18.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-18T11:07:18.653Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "BackendApiService.cs",
+              "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Services\\Api\\BackendApiService.cs",
+              "RelativeDocumentMoniker": "CryptoCompanion\\Services\\Api\\BackendApiService.cs",
+              "ToolTip": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Services\\Api\\BackendApiService.cs",
+              "RelativeToolTip": "CryptoCompanion\\Services\\Api\\BackendApiService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIAwwBMAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:48:03.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "CryptoCompanion\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\MauiProgram.cs",
+              "RelativeToolTip": "CryptoCompanion\\MauiProgram.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T10:29:36.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Microsoft.NET.EolTargetFrameworks.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
@@ -172,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SentimentPage.xaml",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Views\\SentimentPage.xaml",
               "RelativeDocumentMoniker": "CryptoCompanion\\Views\\SentimentPage.xaml",
@@ -184,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CryptoCompanion.csproj",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\CryptoCompanion.csproj",
               "RelativeDocumentMoniker": "CryptoCompanion\\CryptoCompanion.csproj",
@@ -196,19 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "BackendApiService.cs",
-              "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Services\\Api\\BackendApiService.cs",
-              "RelativeDocumentMoniker": "CryptoCompanion\\Services\\Api\\BackendApiService.cs",
-              "ToolTip": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanion\\Services\\Api\\BackendApiService.cs",
-              "RelativeToolTip": "CryptoCompanion\\Services\\Api\\BackendApiService.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAywBIAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:48:03.1Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "CryptoCompanionApi.csproj",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\CryptoCompanionApi\\CryptoCompanionApi.csproj",
               "RelativeDocumentMoniker": "CryptoCompanionApi\\CryptoCompanionApi.csproj",
@@ -220,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "tasks.vs.json",
               "DocumentMoniker": "C:\\Users\\sidha\\OneDrive\\Documents\\CryptoCompanion\\.vs\\tasks.vs.json",
               "RelativeDocumentMoniker": ".vs\\tasks.vs.json",
@@ -256,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Microsoft.NET.Sdk.DefaultItems.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.targets",
@@ -268,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Views_SuggestionsPage.xaml.xsg.cs",
               "DocumentMoniker": "C:\\Users\\sidha\\AppData\\Local\\Temp\\.vsdbgsrc\\ef771961258274b4ef1a98a7f874ee7840ac2068\\Views_SuggestionsPage.xaml.xsg.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\ef771961258274b4ef1a98a7f874ee7840ac2068\\Views_SuggestionsPage.xaml.xsg.cs",
@@ -288,8 +288,7 @@
               "RelativeToolTip": "CryptoCompanion\\App.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-18T11:05:39.867Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-18T11:05:39.867Z"
             },
             {
               "$type": "Document",
@@ -301,8 +300,7 @@
               "RelativeToolTip": "CryptoCompanion\\Resources\\Styles\\Styles.xaml",
               "ViewState": "AgIAAKoAAAAAAAAAAAAkwLoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-18T16:57:41.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-18T16:57:41.028Z"
             }
           ]
         }
